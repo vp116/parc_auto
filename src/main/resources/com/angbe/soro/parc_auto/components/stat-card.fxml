@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.cardosama.fontawesome_fx_6.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root fx:id="card" maxHeight="260.0" maxWidth="260.0" prefHeight="139.0" prefWidth="260.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- Top container (title, value, icon) -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <!-- Text container -->
+        <VBox prefHeight="72.0" prefWidth="180.0" spacing="5">
+            <Label fx:id="titleLabel" style="-fx-text-fill: #6b7280; -fx-font-size: 14px;" />
+            <Label fx:id="valueLabel" style="-fx-text-fill: #000000; -fx-font-size: 32px; -fx-font-weight: bold;" />
+        </VBox>
+
+        <!-- Icon container -->
+        <Pane fx:id="iconContainer" prefHeight="48.0" prefWidth="48.0">
+            <Circle fx:id="iconBackground" fill="#dbdafe" layoutX="24.0" layoutY="24.0" radius="24.0" />
+            <FontAwesomeIconView fx:id="icon" layoutX="13.0" layoutY="31.0" size="20" />
+        </Pane>
+    </HBox>
+
+    <!-- Trend container -->
+    <HBox fx:id="trendContainer" alignment="CENTER_LEFT" spacing="5.0">
+        <FontAwesomeIconView fx:id="trendIcon" size="12" />
+        <Label fx:id="trendLabel" style="-fx-font-size: 12px;" />
+    </HBox>
+</fx:root>

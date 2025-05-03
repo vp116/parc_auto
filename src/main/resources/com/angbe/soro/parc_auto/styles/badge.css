@@ -1,0 +1,53 @@
+/* Style de base du badge */
+.badge {
+    -fx-background-radius: 9999px; /* Forme complètement ronde */
+    -fx-border-radius: 9999px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    /* Limitation de taille */
+    -fx-max-width: 100px; /* Limite la largeur à 100px par exemple */
+    -fx-min-width: 0; /* Peut rétrécir jusqu'à la taille du texte */
+    -fx-pref-width: -1; /* Laisse la taille s'ajuster automatiquement */
+
+}
+
+/* Texte du badge */
+.badge-text {
+    -fx-text-fill: inherit;
+}
+
+/* Couleurs de badge */
+.badge-yellow {
+    -fx-background-color: #fef9c3; /* bg-yellow-100 */
+    -fx-text-fill: #92400e; /* text-yellow-800 */
+}
+
+.badge-red {
+    -fx-background-color: #fee2e2; /* bg-red-100 */
+    -fx-text-fill: #991b1b; /* text-red-800 */
+}
+
+.badge-green {
+    -fx-background-color: #dcfce7; /* bg-green-100 */
+    -fx-text-fill: #166534; /* text-green-800 */
+}
+
+.badge-blue {
+    -fx-background-color: #dbeafe; /* bg-blue-100 */
+    -fx-text-fill: #1e40af; /* text-blue-800 */
+}
+
+.badge-gray {
+    -fx-background-color: #f3f4f6; /* bg-gray-100 */
+    -fx-text-fill: #1f2937; /* text-gray-800 */
+}
+
+.badge-purple {
+    -fx-background-color: #f3e8ff; /* bg-purple-100 */
+    -fx-text-fill: #6b21a8; /* text-purple-800 */
+}
+
+.badge-pink {
+    -fx-background-color: #fce7f3; /* bg-pink-100 */
+    -fx-text-fill: #9d174d; /* text-pink-800 */
+}

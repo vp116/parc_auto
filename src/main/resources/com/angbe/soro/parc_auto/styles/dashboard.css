@@ -1,0 +1,154 @@
+/* Couleurs principales */
+.root {
+    -fx-primary-color: #3498db;
+    -fx-secondary-color: #2980b9;
+    -fx-light-color: #ecf0f1;
+    -fx-dark-color: #2c3e50;
+    -fx-success-color: #2ecc71;
+    -fx-warning-color: #f39c12;
+    -fx-danger-color: #e74c3c;
+}
+
+/* Style général */
+.dashboard-root {
+    -fx-background-color: -fx-light-color;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: -fx-dark-color;
+    -fx-padding: 0 0 20 0;
+    -fx-alignment: top_center;
+}
+
+.menu-items {
+    -fx-padding: 0 10 0 10;
+}
+
+.menu-icon {
+    -fx-fill: #bdc3c7;
+    -fx-cursor: hand;
+}
+
+.menu-icon:hover {
+    -fx-fill: -fx-primary-color;
+}
+
+.menu-icon.active {
+    -fx-fill: -fx-primary-color;
+}
+
+/* Contenu principal */
+.main-content {
+    -fx-padding: 20;
+}
+
+.header {
+    -fx-padding: 0 0 20 0;
+}
+
+.header-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-color;
+}
+
+.header-date {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.notification-icon {
+    -fx-fill: #7f8c8d;
+    -fx-cursor: hand;
+    -fx-padding: 0 0 0 15;
+}
+
+.notification-icon:hover {
+    -fx-fill: -fx-primary-color;
+}
+
+/* Cartes statistiques */
+.stats-cards-container {
+    -fx-padding: 0 0 30 0;
+}
+
+.stats-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+    -fx-spacing: 10;
+}
+
+.stats-card.alert {
+    -fx-border-color: -fx-danger-color;
+    -fx-border-width: 0 0 0 3;
+}
+
+.card-icon {
+    -fx-fill: white;
+}
+
+.card-icon.vehicle {
+    -fx-fill: -fx-primary-color;
+}
+
+.card-icon.mission {
+    -fx-fill: -fx-success-color;
+}
+
+.card-icon.maintenance {
+    -fx-fill: -fx-warning-color;
+}
+
+.card-title {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.card-value {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-color;
+}
+
+.card-subtext {
+    -fx-font-size: 12px;
+    -fx-text-fill: #95a5a6;
+}
+
+/* Graphiques */
+.charts-container {
+    -fx-padding: 20 0 0 0;
+}
+
+.chart-container, .activity-container {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+}
+
+.chart-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-color;
+    -fx-padding: 0 0 10 0;
+}
+
+.pie-chart {
+    -fx-padding: 10;
+}
+
+.activity-table {
+    -fx-background-color: transparent;
+}
+
+/* Animation au survol */
+.stats-card:hover {
+    -fx-translate-y: -5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+    -fx-transition: all 0.3s;
+}

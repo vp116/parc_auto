@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.angbe.soro.parc_auto.component.StatCard?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="458.0" prefWidth="1147.0" stylesheets="@../styles/style.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.angbe.soro.parc_auto.controllers.DashboardContentController">
+    <VBox spacing="20" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+        <!-- Titre -->
+        <Label styleClass="title" text="Tableau de bord">
+            <font>
+                <Font name="System Bold" size="21.0"/>
+            </font>
+        </Label>
+
+        <!-- Cartes de statistiques -->
+        <GridPane hgap="20" prefHeight="138.0" prefWidth="1086.0" vgap="20">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+            </columnConstraints>
+
+            <StatCard fx:id="vehiculeCard" iconColor="#195bb2" iconName="car" title="Véhicules disponibles" value="24"
+                      GridPane.columnIndex="0"/>
+            <StatCard fx:id="routeCard" iconBgColor="#ffedd5" iconColor="#f97316" iconName="route" prefHeight="187.0"
+                      prefWidth="247.0" title="Véhicules en mission" value="8" GridPane.columnIndex="1"/>
+            <StatCard fx:id="entretientCard" iconBgColor="#fef9c3" iconColor="#eab308" iconName="screwdriverWrench"
+                      title="Entretiens en cours" value="3" GridPane.columnIndex="2"/>
+            <StatCard fx:id="assuranceCard" iconBgColor="#fee2e2" iconColor="#ef4444" iconName="shield"
+                      title="Assurances expirant" trendColor="red" trendIconName="circleExclamation"
+                      trendLabelColor="red" trendText="Hello" value="5" GridPane.columnIndex="3"/>
+
+            <rowConstraints>
+                <RowConstraints/>
+            </rowConstraints>
+        </GridPane>
+
+        <!-- Derniers véhicules ajoutés -->
+        <VBox spacing="10">
+            <ScrollPane fx:id="listContent" fitToWidth="true" prefHeight="299.0" prefWidth="1127.0">
+            </ScrollPane>
+        </VBox>
+    </VBox>
+</AnchorPane>

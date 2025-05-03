@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import java.lang.String?>
+<fx:root xmlns:fx="http://javafx.com/fxml" stylesheets="@../styles/badge.css" type="javafx.scene.layout.StackPane">
+    <padding>
+        <Insets bottom="2.0" left="8.0" right="8.0" top="2.0"/>
+    </padding>
+    <styleClass>
+        <String fx:value="badge"/>
+        <String fx:value="badge-blue"/>
+    </styleClass>
+    <Label fx:id="label" styleClass="badge-text" text="Label">
+    </Label>
+</fx:root>

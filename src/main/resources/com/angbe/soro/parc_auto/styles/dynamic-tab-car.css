@@ -1,0 +1,115 @@
+/* Style de base pour la carte */
+.dynamic-table-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+    -fx-border-radius: 5px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+}
+
+/* Style de l'en-tête de la carte */
+.card-header {
+    -fx-border-color: transparent transparent #e0e0e0 transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0 0 10px 0;
+}
+
+/* Style du titre */
+.header-title {
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+/* Style des boutons d'action */
+.card-action-button {
+    -fx-background-color: transparent;
+    -fx-fill: #4B5563;
+    -fx-padding: 5px 12px;
+    -fx-background-radius: 3px;
+    -fx-cursor: hand;
+
+}
+
+.card-action-button:hover {
+    -fx-background-color: #F3F4F6;
+}
+
+
+
+.card-action-button:pressed {
+    -fx-background-color: #6B7280;
+}
+
+/* Style du tableau */
+.dynamic-table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.dynamic-table-view .column-header {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 8px 10px;
+}
+
+.dynamic-table-view .column-header .label {
+    -fx-text-fill: #555555;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.dynamic-table-view .table-row-cell {
+    -fx-border-color: transparent transparent #f0f0f0 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.dynamic-table-view .table-row-cell:odd {
+    -fx-background-color: #fafafa;
+}
+
+.dynamic-table-view .table-row-cell:even {
+    -fx-background-color: #ffffff;
+}
+
+.dynamic-table-view .table-row-cell:selected {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #333333;
+}
+
+.dynamic-table-view .table-cell {
+    -fx-padding: 8px 10px;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent;
+}
+
+/* Style de la barre de défilement */
+.dynamic-table-view .scroll-bar:horizontal,
+.dynamic-table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.dynamic-table-view .scroll-bar .thumb {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-background-radius: 5px;
+}
+
+.dynamic-table-view .scroll-bar .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dynamic-table-view .scroll-bar .increment-button,
+.dynamic-table-view .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 5px;
+}
+
+.dynamic-table-view .scroll-bar .increment-arrow,
+.dynamic-table-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
