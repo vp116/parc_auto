@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.angbe.soro.parc_auto.components.VehiculeFilter?>
+<?import com.cardosama.fontawesome_fx_6.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.angbe.soro.parc_auto.controllers.VehiculeController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.angbe.soro.parc_auto.controllers.VehiculeController">
+
+   <!-- En-tête avec titre et bouton Ajouter -->
+   <HBox alignment="CENTER_LEFT" spacing="600.0" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+      <Label style="-fx-font-size: 20; -fx-font-weight: 800;" text="Gestion des Véhicules" />
+
+      <Button styleClass="button-primary" text="Ajouter un Véhicule" onAction="#handleAddVehicle" AnchorPane.rightAnchor="20">
+         <graphic>
+            <FontAwesomeIconView color="white" iconName="plus" />
+         </graphic>
+      </Button>
+   </HBox>
+
+   <!-- Filtres de véhicules -->
+   <VehiculeFilter fx:id="vehiculeFilter" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="70" />
+
+   <!-- Tableau des véhicules avec ScrollPane -->
+   <ScrollPane fx:id="tableVehicule" fitToWidth="true" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="150">
+      <!-- Le contenu de la table sera ajouté dynamiquement dans le contrôleur -->
+   </ScrollPane>
 
 </AnchorPane>

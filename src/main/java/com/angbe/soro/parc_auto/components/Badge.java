@@ -1,4 +1,4 @@
-package com.angbe.soro.parc_auto.component;
+package com.angbe.soro.parc_auto.components;
 
 import com.angbe.soro.parc_auto.MainApplication;
 import javafx.beans.property.StringProperty;

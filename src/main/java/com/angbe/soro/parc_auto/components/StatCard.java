@@ -1,4 +1,4 @@
-package com.angbe.soro.parc_auto.component;
+package com.angbe.soro.parc_auto.components;
 
 import com.cardosama.fontawesome_fx_6.FontAwesomeIconView;
 import com.cardosama.fontawesome_fx_6.FontAwesomeType;

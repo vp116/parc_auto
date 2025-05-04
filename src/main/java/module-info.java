@@ -15,11 +15,12 @@ module com.angbe.soro.parc_auto {
     exports com.angbe.soro.parc_auto.repository;
     exports com.angbe.soro.parc_auto.services;
     exports com.angbe.soro.parc_auto.controllers;
-    exports com.angbe.soro.parc_auto.component;
+    exports com.angbe.soro.parc_auto.components;
 
     opens com.angbe.soro.parc_auto to javafx.fxml;
     opens com.angbe.soro.parc_auto.controllers to javafx.fxml;
     opens com.angbe.soro.parc_auto.views to javafx.fxml;
-    opens com.angbe.soro.parc_auto.component to javafx.fxml;
+    opens com.angbe.soro.parc_auto.components to javafx.fxml;
     exports com.angbe.soro.parc_auto;
+    exports com.angbe.soro.parc_auto.views;
 }

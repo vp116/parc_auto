@@ -1,4 +1,4 @@
-package com.angbe.soro.parc_auto.component;
+package com.angbe.soro.parc_auto.components;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

@@ -1,7 +1,7 @@
 package com.angbe.soro.parc_auto.controllers;
 
-import com.angbe.soro.parc_auto.component.DynamicTableCard;
-import com.angbe.soro.parc_auto.component.StatCard;
+import com.angbe.soro.parc_auto.components.DynamicTableCard;
+import com.angbe.soro.parc_auto.components.StatCard;
 import com.angbe.soro.parc_auto.models.Vehicule;
 import com.angbe.soro.parc_auto.repository.AppConfig;
 import com.angbe.soro.parc_auto.services.VehiculeService;
@@ -35,8 +35,6 @@ public class DashboardContentController implements Initializable, AutoCloseable 
     private EntityManagerFactory emf;
     private EntityManager em;
 
-    private DynamicTableCard<Vehicule> vehiculeCardTable;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -66,7 +64,7 @@ public class DashboardContentController implements Initializable, AutoCloseable 
         var voirBtn = new Button("Voir tous");
         voirBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: blue;");
         // Créer un DynamicTableCard pour afficher les véhicules
-        vehiculeCardTable = new DynamicTableCard<>("Derniers véhicules ajoutés", null, null, List.of(voirBtn));
+        DynamicTableCard<Vehicule> vehiculeCardTable = new DynamicTableCard<>("Derniers véhicules ajoutés", null, null, List.of(voirBtn));
         vehiculeCardTable.setItems(FXCollections.observableArrayList(vehicules));
         vehiculeCardTable.addPropertyColumn("Immatriculation", "immatriculation");
         vehiculeCardTable.addCustomColumn("Marque/Modèle", v -> v.getMarque() + " " + v.getModele());

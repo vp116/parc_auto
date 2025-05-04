@@ -5,9 +5,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.*?>
-<fx:root xmlns:fx="http://javafx.com/fxml" minWidth="150" prefHeight="74.0" prefWidth="885.0" styleClass="card"
-         stylesheets="@../styles/style.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx">
+<?import java.lang.String?>
+<fx:root xmlns:fx="http://javafx.com/fxml" minWidth="150" prefHeight="74.0" prefWidth="655.0" styleClass="card"
+         stylesheets="@../styles/style.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx">
     <padding>
         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
     </padding>
@@ -18,57 +18,45 @@
             <ColumnConstraints hgrow="ALWAYS"/>
             <ColumnConstraints hgrow="ALWAYS"/>
             <ColumnConstraints hgrow="ALWAYS"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
         </columnConstraints>
 
-
-        <!-- StarDate Date -->
-        <VBox>
-            <Label text="Période"/>
-            <DatePicker fx:id="startDatePicker" promptText="Date debut"/>
-        </VBox>
-
-        <!-- End Date -->
-        <VBox GridPane.columnIndex="1">
-            <Label/>
-            <DatePicker fx:id="endDatePicker" promptText="Date fin"/>
-        </VBox>
-
-        <!-- Status -->
-        <VBox GridPane.columnIndex="2">
-            <Label text="Statut"/>
-            <ComboBox fx:id="statusCombo" value="Toutes" prefHeight="25.0" prefWidth="145.0">
-
+        <!-- Marque -->
+        <VBox GridPane.columnIndex="0">
+            <Label text="Marque"/>
+            <ComboBox fx:id="marqueComboBox" prefHeight="25.0" prefWidth="145.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Toutes"/>
-                        <String fx:value="Planifiée"/>
-                        <String fx:value="En cours"/>
-                        <String fx:value="Terminée"/>
-                        <String fx:value="Annulée"/>
+                        <String fx:value="Toyota"/>
+                        <String fx:value="Renault"/>
+                        <String fx:value="Peugeot"/>
                     </FXCollections>
                 </items>
 
             </ComboBox>
         </VBox>
 
-        <!-- Vehicule -->
-        <VBox GridPane.columnIndex="3">
-            <Label text="Vehicule"/>
-            <ComboBox fx:id="vehiculeComboBox" prefHeight="25.0" prefWidth="155.0">
+        <!-- État -->
+        <VBox GridPane.columnIndex="1">
+            <Label text="État"/>
+            <ComboBox fx:id="etatComboBox" prefHeight="25.0" prefWidth="155.0">
             </ComboBox>
         </VBox>
 
+        <!-- Date d'acquisition -->
+        <VBox GridPane.columnIndex="2">
+            <Label text="Date d'acquisition"/>
+            <DatePicker fx:id="dateAcquisitionDatePicker"/>
+        </VBox>
 
         <!-- Bouton Filtrer -->
-        <VBox alignment="BOTTOM_CENTER" GridPane.columnIndex="4">
+        <VBox alignment="BOTTOM_CENTER" GridPane.columnIndex="3">
             <Button fx:id="filterButton" styleClass="button-primary" text="Filtrer">
                 <graphic>
                     <FontAwesomeIconView color="white" iconName="filter"/>
                 </graphic>
             </Button>
         </VBox>
-
         <rowConstraints>
             <RowConstraints/>
         </rowConstraints>

@@ -1,6 +1,7 @@
-package com.angbe.soro.parc_auto.components;
+package com.angbe.soro.parc_auto.views;
 
 import com.angbe.soro.parc_auto.MainApplication;
+import com.angbe.soro.parc_auto.models.Mission;
 import com.angbe.soro.parc_auto.models.Personnel;
 import com.angbe.soro.parc_auto.models.Vehicule;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
@@ -167,7 +169,63 @@ public class AddMissionForm extends GridPane {
         alert.showAndWait();
     }
 
+    public Mission createMissionFromField() {
+        var mission = new Mission();
 
+        // Récupérer et assigner le véhicule
+        if (vehicleCombo.getValue() != null) {
+            mission.setVehicule(vehicleCombo.getValue());
+        }
+
+        // Récupérer et assigner les dates et heures
+        if (startDatePicker.getValue() != null && startTimeCombo.getValue() != null) {
+            LocalDateTime startDateTime = LocalDateTime.of(
+                    startDatePicker.getValue(),
+                    startTimeCombo.getValue()
+            );
+            mission.setDateDebut(java.sql.Timestamp.valueOf(startDateTime));
+        }
+
+        if (endDatePicker.getValue() != null && endTimeCombo.getValue() != null) {
+            LocalDateTime endDateTime = LocalDateTime.of(
+                    endDatePicker.getValue(),
+                    endTimeCombo.getValue()
+            );
+            mission.setDateFin(java.sql.Timestamp.valueOf(endDateTime));
+        }
+
+        // Récupérer et assigner le circuit
+        if (circuitArea.getText() != null && !circuitArea.getText().isEmpty()) {
+            mission.setCircuit(circuitArea.getText());
+        }
+
+        // Récupérer et assigner le budget
+        if (budgetField.getText() != null && !budgetField.getText().isEmpty()) {
+            try {
+                mission.setCout(Integer.parseInt(budgetField.getText()));
+            } catch (NumberFormatException e) {
+                // Gérer l'erreur de conversion si nécessaire
+                mission.setCout(null);
+            }
+        }
+
+        // Récupérer et assigner le coût carburant
+        if (fuelField.getText() != null && !fuelField.getText().isEmpty()) {
+            try {
+                mission.setCoutCarburant(Integer.parseInt(fuelField.getText()));
+            } catch (NumberFormatException e) {
+                // Gérer l'erreur de conversion si nécessaire
+                mission.setCoutCarburant(null);
+            }
+        }
+
+        // Récupérer et assigner les observations
+        if (obsArea.getText() != null && !obsArea.getText().isEmpty()) {
+            mission.setObservation(obsArea.getText());
+        }
+
+        return mission;
+    }
 }
 
 
