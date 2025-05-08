@@ -8,8 +8,10 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MissionService {
     private final Repository<Mission> missionRepository;
@@ -78,6 +80,27 @@ public class MissionService {
         } else {
             throw new RuntimeException("Mission ou personnel non trouvé");
         }
+    }
+
+    public void retirerParticipant(int missionId, int personnelId) {
+        Optional<Mission> mission = missionRepository.findById(missionId);
+        Optional<Personnel> personnel = personnelRepository.findById(personnelId);
+
+        if (mission.isPresent() && personnel.isPresent()) {
+            Mission m = mission.get();
+            m.getParticipants().remove(new Participer(personnel.get(), m));
+            missionRepository.save(m);
+        } else {
+            throw new RuntimeException("Mission ou personnel non trouvé");
+        }
+    }
+
+    public List<Personnel> getParticipantsDeMission(int missionId) {
+        Optional<Mission> missionOpt = missionRepository.findById(missionId);
+
+        return missionOpt.map(mission -> mission.getParticipants().stream()
+                .map(Participer::getPersonnel)
+                .collect(Collectors.toList())).orElse(Collections.emptyList());
     }
 
     public double getCoutTotalMissions() {

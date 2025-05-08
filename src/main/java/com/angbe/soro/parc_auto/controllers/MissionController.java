@@ -83,7 +83,7 @@ public class MissionController implements Initializable, AutoCloseable {
 
             missionFilter.setOnFilterAction(e -> applyFilters());
 
-            addMissionBtn.setOnAction(e -> new DialogLauncher().showAddMissionDialog());
+            addMissionBtn.setOnAction(e -> DialogLauncher.showAddMissionDialog());
 
 
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class MissionController implements Initializable, AutoCloseable {
     }
 
     private void showAddMissionDialog() {
-        var dialogLauncher = new DialogLauncher();
+
 
 
     }

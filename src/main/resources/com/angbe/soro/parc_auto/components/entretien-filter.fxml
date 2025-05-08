@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.cardosama.fontawesome_fx_6.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root minWidth="150" prefHeight="74.0" prefWidth="661.0" styleClass="card" stylesheets="@../styles/style.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+    </padding>
+
+    <GridPane hgap="16.0" vgap="16.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+
+        <!-- StarDate Date -->
+        <VBox>
+            <Label text="Période" />
+            <DatePicker fx:id="enterDatePicker" promptText="Date entrée" />
+        </VBox>
+
+        <!-- End Date -->
+        <VBox GridPane.columnIndex="1">
+            <Label />
+            <DatePicker fx:id="sortieDatePicker" promptText="Date sortie" />
+        </VBox>
+
+        <!-- Status -->
+        <VBox GridPane.columnIndex="2">
+            <Label text="Statut" />
+            <ComboBox fx:id="statusCombo" prefHeight="25.0" prefWidth="145.0" value="Toutes">
+
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Toutes" />
+                        <String fx:value="Planifiée" />
+                        <String fx:value="En cours" />
+                        <String fx:value="Terminée" />
+                        <String fx:value="Annulée" />
+                    </FXCollections>
+                </items>
+
+            </ComboBox>
+        </VBox>
+
+
+        <!-- Bouton Filtrer -->
+        <VBox alignment="BOTTOM_CENTER" GridPane.columnIndex="3">
+            <Button fx:id="filterButton" styleClass="button-primary" text="Filtrer">
+                <graphic>
+                    <FontAwesomeIconView color="white" iconName="filter" />
+                </graphic>
+            </Button>
+        </VBox>
+
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+</fx:root>

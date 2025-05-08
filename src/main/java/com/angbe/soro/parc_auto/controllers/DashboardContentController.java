@@ -64,7 +64,7 @@ public class DashboardContentController implements Initializable, AutoCloseable 
         var voirBtn = new Button("Voir tous");
         voirBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: blue;");
         // Créer un DynamicTableCard pour afficher les véhicules
-        DynamicTableCard<Vehicule> vehiculeCardTable = new DynamicTableCard<>("Derniers véhicules ajoutés", null, null, List.of(voirBtn));
+        DynamicTableCard<Vehicule> vehiculeCardTable = new DynamicTableCard<>("Derniers véhicules ajoutés", null, null, List.of(voirBtn), true);
         vehiculeCardTable.setItems(FXCollections.observableArrayList(vehicules));
         vehiculeCardTable.addPropertyColumn("Immatriculation", "immatriculation");
         vehiculeCardTable.addCustomColumn("Marque/Modèle", v -> v.getMarque() + " " + v.getModele());

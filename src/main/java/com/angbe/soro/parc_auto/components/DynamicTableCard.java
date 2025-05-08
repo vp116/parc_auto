@@ -147,7 +147,7 @@ public class DynamicTableCard<T> extends TableCardBase<T> {
             Function<String, String> styleDeterminer) {
 
         TableColumn<S, String> column = new TableColumn<>(title);
-//        column.setMinWidth(150);
+        column.setMinWidth(100);
         column.setStyle("-fx-alignment: CENTER;");
 
         column.setCellValueFactory(cellData -> new SimpleStringProperty(propertyGetter.apply(cellData.getValue())));
@@ -272,6 +272,7 @@ public class DynamicTableCard<T> extends TableCardBase<T> {
     public TableColumn<T, String> addPropertyColumn(String columnName, String property) {
         // Créer une colonne standard au lieu d'utiliser addColumn pour avoir un meilleur contrôle
         TableColumn<T, String> column = new TableColumn<>(columnName);
+        column.setMinWidth(150);
         column.setStyle("-fx-alignment: center;");
         column.setCellValueFactory(cellData -> {
             try {
@@ -308,6 +309,7 @@ public class DynamicTableCard<T> extends TableCardBase<T> {
      */
     public <U> TableColumn<T, U> addCustomColumn(String columnName, Function<T, U> valueExtractor) {
         TableColumn<T, U> column = new TableColumn<>(columnName);
+        column.setMinWidth(150);
         column.setStyle("-fx-alignment: center");
         column.setCellValueFactory(cellData -> {
             U value = valueExtractor.apply(cellData.getValue());

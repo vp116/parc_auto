@@ -2,6 +2,7 @@ package com.angbe.soro.parc_auto;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -39,5 +40,21 @@ public class ViewFactory {
             logger.log(Level.SEVERE, "Error loading view: " + viewName, e);
             return null;
         }
+    }
+
+    public static void showSuccessAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Succès");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public static void ShowEchecEnregAlert(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText("Échec de l'enregistrement");
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
     }
 }

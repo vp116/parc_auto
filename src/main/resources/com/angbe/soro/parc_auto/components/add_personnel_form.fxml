@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<fx:root hgap="10" type="javafx.scene.layout.GridPane" vgap="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+    <padding>
+        <Insets bottom="15" left="15" right="15" top="15" />
+    </padding>
+
+    <!-- Nom -->
+    <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+    <!-- Prénom -->
+    <Label text="Prénom:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="prenomField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <!-- Contact -->
+    <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="contactField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <!-- Fonction -->
+    <Label text="Fonction:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <ComboBox fx:id="fonctionCombo" prefHeight="25.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+    <!-- Service -->
+    <Label text="Service:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <ComboBox fx:id="serviceCombo" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+    <!-- Véhicule -->
+    <Label text="Véhicule attribué:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <ComboBox fx:id="vehiculeCombo" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+    <columnConstraints>
+        <ColumnConstraints minWidth="100" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" />
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+    </rowConstraints>
+</fx:root>

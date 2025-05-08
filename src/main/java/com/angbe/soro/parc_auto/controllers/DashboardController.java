@@ -50,7 +50,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void showReports(ActionEvent actionEvent) {
+    public void showReports() {
         loadView("reports");
     }
 

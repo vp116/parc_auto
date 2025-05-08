@@ -42,6 +42,28 @@ public class JpaRepository<T> implements Repository<T> {
     }
 
     @Override
+    public void update(T entity) {
+        executeInTransaction(() -> {
+            // Récupérer l'identifiant de l'entité
+            Object id = em.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(entity);
+
+            // Vérifier si l'identifiant est valide
+            if (id == null) {
+                throw new IllegalArgumentException("L'entité doit avoir un identifiant valide pour être mise à jour.");
+            }
+
+            // Vérifier si l'entité existe
+            T existingEntity = em.find(entityClass, id);
+            if (existingEntity == null) {
+                throw new IllegalArgumentException("L'entité avec l'identifiant " + id + " n'existe pas et ne peut donc pas être mise à jour.");
+            }
+
+            // Appliquer les modifications sans retourner de résultat
+            em.merge(entity);
+        });
+    }
+
+    @Override
     public void delete(int id) {
         executeInTransaction(() -> {
             T entity = em.find(entityClass, id);

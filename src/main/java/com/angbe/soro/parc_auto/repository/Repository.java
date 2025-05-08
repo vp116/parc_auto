@@ -38,6 +38,13 @@ public interface Repository<T> {
     T save(T entity);
 
     /**
+     * Met à jour une entité existante.
+     *
+     * @param entity l'entité à mettre à jour avec les nouvelles valeurs
+     */
+    void update(T entity);
+
+    /**
      * Supprime une entité par son identifiant.
      *
      * @param id l'identifiant de l'entité à supprimer

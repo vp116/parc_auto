@@ -4,12 +4,15 @@ import com.angbe.soro.parc_auto.MainApplication;
 import com.angbe.soro.parc_auto.models.Mission;
 import com.angbe.soro.parc_auto.models.Personnel;
 import com.angbe.soro.parc_auto.models.Vehicule;
+import com.angbe.soro.parc_auto.services.PersonnelService;
+import com.angbe.soro.parc_auto.services.VehiculeService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
@@ -22,7 +25,7 @@ import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class AddMissionForm extends GridPane {
-
+private Mission missionEnEdition;
     @FXML
     public VBox memberAdd;
     @FXML
@@ -55,9 +58,12 @@ public class AddMissionForm extends GridPane {
     @FXML
     private TextArea obsArea;
 
+    private final ObservableList<Personnel> participantsList = FXCollections.observableArrayList();
+
+    private final VehiculeService vehiculeService = new VehiculeService();
+    private final PersonnelService personnelService = new PersonnelService();
 
     public AddMissionForm() {
-
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("components/add_mission_form.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -65,16 +71,14 @@ public class AddMissionForm extends GridPane {
         try {
             fxmlLoader.load();
             configureTimeCombos();
-
+            configureVehicleCombo();  // Décommenter et activer
+            configurePersonnelCombo(); // Décommenter et activer
         } catch (IOException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
-
-
-       /* configureVehicleCombo();
-        configurePersonnelCombo();
-        configureTimeCombos();*/
     }
+
+
 
     private void configureTimeCombos() {
         ObservableList<LocalTime> hours = FXCollections.observableArrayList();
@@ -106,7 +110,33 @@ public class AddMissionForm extends GridPane {
         endTimeCombo.setPromptText("Heure fin");
     }
 
-/*
+
+    // Méthode pour ajouter un participant
+    public void ajouterParticipant(Personnel personnel) {
+        if (personnel != null && !participantsList.contains(personnel)) {
+            participantsList.add(personnel);
+            updateParticipantsDisplay();
+        }
+    }
+
+    private void updateParticipantsDisplay() {
+        memberAdd.getChildren().clear();
+        for (Personnel p : participantsList) {
+            HBox hbox = new HBox(5);
+            hbox.getChildren().add(new Label(p.getNom() + " " + p.getPrenom()));
+
+            Button removeBtn = new Button("×");
+            removeBtn.setOnAction(e -> {
+                participantsList.remove(p);
+                updateParticipantsDisplay();
+            });
+            hbox.getChildren().add(removeBtn);
+
+            memberAdd.getChildren().add(hbox);
+        }
+    }
+
+
     private void configureVehicleCombo() {
         ObservableList<Vehicule> vehicules = FXCollections.observableArrayList(vehiculeService.getAllVehicules());
         vehicleCombo.setItems(vehicules);
@@ -131,7 +161,6 @@ public class AddMissionForm extends GridPane {
         formateComboBox(personnelCombo);
     }
 
-   */
 
     private void formateComboBox(ComboBox<Personnel> personnelCombo) {
         personnelCombo.setConverter(new StringConverter<Personnel>() {
@@ -161,72 +190,113 @@ public class AddMissionForm extends GridPane {
     // Méthode appelée sur le clic du bouton "+"
     @FXML
     private void handleAddPersonnel() {
-        // TODO : Ouvrir une fenêtre pour ajouter un nouveau personnel
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Ajout de personnel");
-        alert.setHeaderText(null);
-        alert.setContentText("Ouverture de la fenêtre d’ajout de personnel (à implémenter)");
-        alert.showAndWait();
+        Personnel selectedPersonnel = personnelCombo.getSelectionModel().getSelectedItem();
+        if (selectedPersonnel != null) {
+            ajouterParticipant(selectedPersonnel);
+            personnelCombo.getSelectionModel().clearSelection();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucun personnel sélectionné");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un membre du personnel à ajouter");
+            alert.showAndWait();
+        }
+    }
+
+    public void setMissionData(Mission mission) {
+        this.missionEnEdition = mission;
+        vehicleCombo.setValue(mission.getVehicule());
+//        startDatePicker.setValue();
+
+
+    }
+
+    public void clearForm() {
+        this.missionEnEdition = null;
+        vehicleCombo.getSelectionModel().clearSelection();
+        personnelCombo.getSelectionModel().clearSelection();
+        startDatePicker.setValue(null);
+        startTimeCombo.getSelectionModel().clearSelection();
+        endDatePicker.setValue(null);
+        endTimeCombo.getSelectionModel().clearSelection();
+        circuitArea.clear();
+        budgetField.clear();
+        fuelField.clear();
+        obsArea.clear();
+        participantsList.clear();
+        updateParticipantsDisplay();
     }
 
     public Mission createMissionFromField() {
-        var mission = new Mission();
+       Mission  mission = (missionEnEdition != null) ? missionEnEdition : new Mission();
+
+        // Validation des champs obligatoires
+        if (vehicleCombo.getValue() == null) {
+            throw new IllegalArgumentException("Un véhicule doit être sélectionné");
+        }
+        if (startDatePicker.getValue() == null || startTimeCombo.getValue() == null) {
+            throw new IllegalArgumentException("La date et heure de début sont obligatoires");
+        }
+        if (endDatePicker.getValue() == null || endTimeCombo.getValue() == null) {
+            throw new IllegalArgumentException("La date et heure de fin sont obligatoires");
+        }
 
         // Récupérer et assigner le véhicule
-        if (vehicleCombo.getValue() != null) {
-            mission.setVehicule(vehicleCombo.getValue());
+        mission.setVehicule(vehicleCombo.getValue());
+
+        // Dates et heures
+        LocalDateTime startDateTime = LocalDateTime.of(
+                startDatePicker.getValue(),
+                startTimeCombo.getValue()
+        );
+        if(missionEnEdition.getDateDebut() == null){
+
+        mission.setDateDebut(java.sql.Timestamp.valueOf(startDateTime));
         }
 
-        // Récupérer et assigner les dates et heures
-        if (startDatePicker.getValue() != null && startTimeCombo.getValue() != null) {
-            LocalDateTime startDateTime = LocalDateTime.of(
-                    startDatePicker.getValue(),
-                    startTimeCombo.getValue()
-            );
-            mission.setDateDebut(java.sql.Timestamp.valueOf(startDateTime));
-        }
+        LocalDateTime endDateTime = LocalDateTime.of(
+                endDatePicker.getValue(),
+                endTimeCombo.getValue()
+        );
 
-        if (endDatePicker.getValue() != null && endTimeCombo.getValue() != null) {
-            LocalDateTime endDateTime = LocalDateTime.of(
-                    endDatePicker.getValue(),
-                    endTimeCombo.getValue()
-            );
+        if(missionEnEdition.getDateDebut() == null) {
             mission.setDateFin(java.sql.Timestamp.valueOf(endDateTime));
         }
+        // Circuit
+        mission.setCircuit(circuitArea.getText());
 
-        // Récupérer et assigner le circuit
-        if (circuitArea.getText() != null && !circuitArea.getText().isEmpty()) {
-            mission.setCircuit(circuitArea.getText());
-        }
-
-        // Récupérer et assigner le budget
-        if (budgetField.getText() != null && !budgetField.getText().isEmpty()) {
-            try {
+        // Budget
+        try {
+            if (!budgetField.getText().isEmpty()) {
                 mission.setCout(Integer.parseInt(budgetField.getText()));
-            } catch (NumberFormatException e) {
-                // Gérer l'erreur de conversion si nécessaire
-                mission.setCout(null);
             }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Le budget doit être un nombre valide");
         }
 
-        // Récupérer et assigner le coût carburant
-        if (fuelField.getText() != null && !fuelField.getText().isEmpty()) {
-            try {
+        // Carburant
+        try {
+            if (!fuelField.getText().isEmpty()) {
                 mission.setCoutCarburant(Integer.parseInt(fuelField.getText()));
-            } catch (NumberFormatException e) {
-                // Gérer l'erreur de conversion si nécessaire
-                mission.setCoutCarburant(null);
             }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Le coût carburant doit être un nombre valide");
         }
 
-        // Récupérer et assigner les observations
-        if (obsArea.getText() != null && !obsArea.getText().isEmpty()) {
-            mission.setObservation(obsArea.getText());
+        // Observations
+        mission.setObservation(obsArea.getText());
+
+        // Participants
+        for (Personnel participant : participantsList) {
+//            mission.getParticipants().add(participant);
         }
 
         return mission;
     }
+
+
 }
+
 
 
 

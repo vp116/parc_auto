@@ -1,11 +1,11 @@
 package com.angbe.soro.parc_auto.controllers;
 
+import com.angbe.soro.parc_auto.components.DialogLauncher;
 import com.angbe.soro.parc_auto.components.DynamicTableCard;
 import com.angbe.soro.parc_auto.components.VehiculeFilter;
 import com.angbe.soro.parc_auto.models.Vehicule;
 import com.angbe.soro.parc_auto.repository.AppConfig;
 import com.angbe.soro.parc_auto.services.VehiculeService;
-import com.angbe.soro.parc_auto.views.AddVehicleForm;
 import com.cardosama.fontawesome_fx_6.FontAwesomeIconView;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,7 +13,6 @@ import jakarta.persistence.Persistence;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
@@ -26,6 +25,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.angbe.soro.parc_auto.ViewFactory.showSuccessAlert;
 
 public class VehiculeController implements Initializable, AutoCloseable {
     @FXML
@@ -71,7 +72,7 @@ public class VehiculeController implements Initializable, AutoCloseable {
         btnPrint.getStyleClass().add("btn-actions");
 
         // Créer un DynamicTableCard pour afficher les véhicules
-        vehiculeCardTable = new DynamicTableCard<>("Liste des véhicules", null, null, List.of(btnExport, btnPrint));
+        vehiculeCardTable = new DynamicTableCard<>("Liste des véhicules", null, null, List.of(btnExport, btnPrint), true);
         vehiculeCardTable.setItems(FXCollections.observableArrayList(vehicules));
         vehiculeCardTable.addPropertyColumn("Immatriculation", "immatriculation");
         vehiculeCardTable.addCustomColumn("Marque/Modèle", v -> v.getMarque() + " " + v.getModele());
@@ -88,16 +89,26 @@ public class VehiculeController implements Initializable, AutoCloseable {
 
         }));
         vehiculeCardTable.addCustomColumn("Date acquisition", v -> formatter.format(v.getDateAcquisition()));
-        vehiculeCardTable.addColumn(DynamicTableCard.createActionsColumn("Actions", null, null, null));
+        vehiculeCardTable.addColumn(DynamicTableCard.createActionsColumn("Actions",v -> voirVehicule(v), v -> updateVehicule(v), v-> deleteVehicule(v)));
         tableVehicule.setContent(vehiculeCardTable);
+    }
+
+    private void deleteVehicule(Vehicule v) {
+
+    }
+
+    private void updateVehicule(Vehicule v) {
+        var formResult = DialogLauncher.showEditVehiculeDialog(v);
+    }
+
+    private void voirVehicule(Vehicule v) {
     }
 
     @FXML
     private void handleAddVehicle() {
-        AddVehicleForm form = new AddVehicleForm();
-        Dialog<Vehicule> dialog = form.createAddVehicleDialog();
 
-        // Optionnel: Définir la fenêtre parente
+
+      /*  // Optionnel: Définir la fenêtre parente
         dialog.initOwner(tableVehicule.getScene().getWindow());
 
         // Afficher le dialogue et attendre la réponse
@@ -112,20 +123,14 @@ public class VehiculeController implements Initializable, AutoCloseable {
 
             // Afficher une confirmation
             showSuccessAlert("Véhicule ajouté avec succès");
-        });
+        });*/
     }
 
     private void refreshVehicleTable() {
         vehiculeCardTable.getTableView().getItems().setAll(vehiculeService.getAllVehicules());
     }
 
-    private void showSuccessAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 
     @Override
     public void close() throws Exception {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane"
+         xmlns="http://javafx.com/javafx" hgap="10" vgap="10">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <!-- Véhicule -->
+    <Label text="Véhicule:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <ComboBox fx:id="vehiculeCombo" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+    <!-- Date d'entrée -->
+    <Label text="Date d'entrée:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <DatePicker fx:id="dateEntreePicker"/>
+        <ComboBox fx:id="heureEntreeCombo" promptText="Heure"/>
+    </HBox>
+
+    <!-- Date de sortie -->
+    <Label text="Date de sortie:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <DatePicker fx:id="dateSortiePicker"/>
+        <ComboBox fx:id="heureSortieCombo" promptText="Heure"/>
+    </HBox>
+
+    <!-- Motif -->
+    <Label text="Motif:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="motifField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <!-- Lieu -->
+    <Label text="Lieu:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <TextField fx:id="lieuField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <!-- Coût -->
+    <Label text="Coût:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextField fx:id="coutField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <!-- Observations -->
+    <Label text="Observations:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <TextArea fx:id="observationArea" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <columnConstraints>
+        <ColumnConstraints minWidth="100"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="200"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+    </rowConstraints>
+</fx:root>
