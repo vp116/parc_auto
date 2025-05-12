@@ -14,6 +14,7 @@
             xmlns="http://javafx.com/javafx/17"
             fx:controller="com.angbe.soro.parc_auto.controllers.EntretienController"
             stylesheets="@../styles/style.css"
+            style="-fx-background-color: white;"
             prefHeight="600.0"
             prefWidth="800.0">
 

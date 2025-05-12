@@ -11,6 +11,7 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/17"
+            style="-fx-background-color: white;"
             fx:controller="com.angbe.soro.parc_auto.controllers.MissionController"
             stylesheets="@../styles/style.css"
             prefHeight="600.0"
@@ -27,6 +28,8 @@
 
         <Button fx:id="addMissionBtn"
                 styleClass="button-primary"
+
+                onAction="#handleAddMissionDialog"
                 text="Nouvelle mission">
             <graphic>
                 <FontAwesomeIconView iconName="plus" color="white"/>

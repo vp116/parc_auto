@@ -130,7 +130,7 @@ public class PersonnelService {
     }
 
     public void updatePersonnel(Personnel personnel) {
-        if(!vehiculeRepository.existsById(personnel.getIdPersonnel())){
+        if(!personnelRepository.existsById(personnel.getIdPersonnel())){
             throw new RuntimeException("Le membre du Personnel avec l'ID" + personnel.getIdPersonnel() + " n'existe pas");
         }
 

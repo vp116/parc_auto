@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <!-- Numéro de carte -->
+    <Label text="Numéro de carte:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="numCarteField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    
+    <!-- Véhicule -->
+    <Label text="Véhicule:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <ComboBox fx:id="vehicleCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS" maxWidth="Infinity"/>
+    
+    <!-- Agence -->
+    <Label text="Agence:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="agenceField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    
+    <!-- Date début -->
+    <Label text="Date début:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" maxWidth="Infinity"/>
+    
+    <!-- Date fin -->
+    <Label text="Date fin:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity"/>
+    
+    <!-- Coût -->
+    <Label text="Coût:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextField fx:id="coutField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    
+    <columnConstraints>
+        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="150" />
+        <ColumnConstraints hgrow="ALWAYS" minWidth="200" prefWidth="300" />
+    </columnConstraints>
+</fx:root>

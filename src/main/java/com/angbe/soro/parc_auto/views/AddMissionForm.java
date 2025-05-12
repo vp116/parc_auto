@@ -1,7 +1,9 @@
 package com.angbe.soro.parc_auto.views;
 
 import com.angbe.soro.parc_auto.MainApplication;
+import com.angbe.soro.parc_auto.components.DialogLauncher;
 import com.angbe.soro.parc_auto.models.Mission;
+import com.angbe.soro.parc_auto.models.Participer;
 import com.angbe.soro.parc_auto.models.Personnel;
 import com.angbe.soro.parc_auto.models.Vehicule;
 import com.angbe.soro.parc_auto.services.PersonnelService;
@@ -10,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -17,14 +20,16 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
-public class AddMissionForm extends GridPane {
+public class AddMissionForm extends GridPane implements DialogLauncher.EntityForm<Mission> {
 private Mission missionEnEdition;
     @FXML
     public VBox memberAdd;
@@ -178,14 +183,7 @@ private Mission missionEnEdition;
         });
     }
 
-    /*// Appelée depuis l’extérieur pour initialiser les services
-    public void setServices(VehiculeService vehiculeService,
-                            MissionService missionService,
-                            PersonnelService personnelService) {
-        this.vehiculeService = vehiculeService;
-        this.missionService = missionService;
-        this.personnelService = personnelService;
-    }*/
+ 
 
     // Méthode appelée sur le clic du bouton "+"
     @FXML
@@ -206,9 +204,41 @@ private Mission missionEnEdition;
     public void setMissionData(Mission mission) {
         this.missionEnEdition = mission;
         vehicleCombo.setValue(mission.getVehicule());
-//        startDatePicker.setValue();
-
-
+        
+        // Configurer les dates et heures
+        if (mission.getDateDebut() != null) {
+            LocalDateTime startDateTime = ((Timestamp) mission.getDateDebut()).toLocalDateTime();
+            startDatePicker.setValue(startDateTime.toLocalDate());
+            startTimeCombo.setValue(startDateTime.toLocalTime());
+        }
+        
+        if (mission.getDateFin() != null) {
+            LocalDateTime endDateTime = ((Timestamp) mission.getDateFin()).toLocalDateTime();
+            endDatePicker.setValue(endDateTime.toLocalDate());
+            endTimeCombo.setValue(endDateTime.toLocalTime());
+        }
+        
+        // Configurer les autres champs
+        circuitArea.setText(mission.getCircuit());
+        
+        if (mission.getCout() != null) {
+            budgetField.setText(String.valueOf(mission.getCout()));
+        }
+        
+        if (mission.getCoutCarburant() != null) {
+            fuelField.setText(String.valueOf(mission.getCoutCarburant()));
+        }
+        
+        obsArea.setText(mission.getObservation());
+        
+        // Charger les participants
+        participantsList.clear();
+        if (mission.getParticipants() != null) {
+            for (Participer participer : mission.getParticipants()) {
+                participantsList.add(participer.getPersonnel());
+            }
+            updateParticipantsDisplay();
+        }
     }
 
     public void clearForm() {
@@ -228,7 +258,7 @@ private Mission missionEnEdition;
     }
 
     public Mission createMissionFromField() {
-       Mission  mission = (missionEnEdition != null) ? missionEnEdition : new Mission();
+       Mission mission = (missionEnEdition != null) ? missionEnEdition : new Mission();
 
         // Validation des champs obligatoires
         if (vehicleCombo.getValue() == null) {
@@ -249,9 +279,10 @@ private Mission missionEnEdition;
                 startDatePicker.getValue(),
                 startTimeCombo.getValue()
         );
-        if(missionEnEdition.getDateDebut() == null){
-
-        mission.setDateDebut(java.sql.Timestamp.valueOf(startDateTime));
+        
+        // Vérifier si c'est une nouvelle mission ou si la date de début n'est pas définie
+        if (missionEnEdition == null || missionEnEdition.getDateDebut() == null) {
+            mission.setDateDebut(java.sql.Timestamp.valueOf(startDateTime));
         }
 
         LocalDateTime endDateTime = LocalDateTime.of(
@@ -259,9 +290,11 @@ private Mission missionEnEdition;
                 endTimeCombo.getValue()
         );
 
-        if(missionEnEdition.getDateDebut() == null) {
+        // Vérifier si c'est une nouvelle mission ou si la date de fin n'est pas définie
+        if (missionEnEdition == null || missionEnEdition.getDateFin() == null) {
             mission.setDateFin(java.sql.Timestamp.valueOf(endDateTime));
         }
+        
         // Circuit
         mission.setCircuit(circuitArea.getText());
 
@@ -287,14 +320,30 @@ private Mission missionEnEdition;
         mission.setObservation(obsArea.getText());
 
         // Participants
+        if (mission.getParticipants() == null) {
+            mission.setParticipants(new HashSet<>());
+        } else {
+            mission.getParticipants().clear();
+        }
+        
         for (Personnel participant : participantsList) {
-//            mission.getParticipants().add(participant);
+            Participer participer = new Participer(participant, mission);
+            mission.getParticipants().add(participer);
         }
 
         return mission;
     }
 
 
+    @Override
+    public Node getContent() {
+        return this;
+    }
+
+    @Override
+    public Mission createEntity() throws IllegalArgumentException {
+        return createMissionFromField();
+    }
 }
 
 

@@ -2,7 +2,9 @@ package com.angbe.soro.parc_auto;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,6 +44,18 @@ public class ViewFactory {
         }
     }
 
+    public static void loadFxml(String fxmlPath, String title) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(fxmlPath));
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(fxmlLoader.load()));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur", "Erreur lors de l'ouverture de la fenêtre", Alert.AlertType.ERROR);
+        }
+    }
+
     public static void showSuccessAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Succès");
@@ -55,6 +69,14 @@ public class ViewFactory {
         alert.setTitle("Erreur");
         alert.setHeaderText("Échec de l'enregistrement");
         alert.setContentText(e.getMessage());
+        alert.showAndWait();
+    }
+
+    public static void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

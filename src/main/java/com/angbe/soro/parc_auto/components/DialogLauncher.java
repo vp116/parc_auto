@@ -1,9 +1,7 @@
 package com.angbe.soro.parc_auto.components;
 
-import com.angbe.soro.parc_auto.models.Entretien;
-import com.angbe.soro.parc_auto.models.Mission;
-import com.angbe.soro.parc_auto.models.Personnel;
-import com.angbe.soro.parc_auto.models.Vehicule;
+import com.angbe.soro.parc_auto.models.*;
+import com.angbe.soro.parc_auto.views.AddAssuranceForm;
 import com.angbe.soro.parc_auto.views.AddEntretienForm;
 import com.angbe.soro.parc_auto.views.AddMissionForm;
 import com.angbe.soro.parc_auto.views.AddPersonnelForm;
@@ -17,13 +15,13 @@ public class DialogLauncher {
     // Méthodes pour les missions
     public static Optional<Mission> showAddMissionDialog() {
         AddMissionForm content = new AddMissionForm();
-        return createEntityDialog((EntityForm<Mission>) content, "Nouvelle mission", "Remplissez les informations de la mission");
+        return createEntityDialog(content, "Nouvelle mission", "Remplissez les informations de la mission");
     }
 
     public static Optional<Mission> showEditMissionDialog(Mission mission) {
         AddMissionForm content = new AddMissionForm();
         content.setMissionData(mission);
-        return createEntityDialog((EntityForm<Mission>) content, "Modifier mission", "Modifiez les informations de la mission");
+        return createEntityDialog(content, "Modifier mission", "Modifiez les informations de la mission");
     }
 
     // Méthodes pour le personnel
@@ -41,13 +39,13 @@ public class DialogLauncher {
     // Méthodes pour les entretiens
     public static Optional<Entretien> showAddEntretienDialog() {
         AddEntretienForm content = new AddEntretienForm();
-        return createEntityDialog((EntityForm<Entretien>) content, "Nouvel entretien", "Remplissez les informations de l'entretien");
+        return createEntityDialog(content, "Nouvel entretien", "Remplissez les informations de l'entretien");
     }
 
     public static Optional<Entretien> showEditEntretienDialog(Entretien entretien) {
         AddEntretienForm content = new AddEntretienForm();
         content.setEntretienData(entretien);
-        return createEntityDialog((EntityForm<Entretien>) content, "Modifier entretien", "Modifiez les informations de l'entretien");
+        return createEntityDialog(content, "Modifier entretien", "Modifiez les informations de l'entretien");
     }
 
     // Méthodes pour les véhicules
@@ -102,6 +100,18 @@ public class DialogLauncher {
         alert.setHeaderText("Données invalides");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // Méthodes pour les assurances
+    public static Optional<Assurance> showAddAssuranceDialog() {
+        AddAssuranceForm content = new AddAssuranceForm();
+        return createEntityDialog(content, "Nouvelle assurance", "Remplissez les informations de l'assurance");
+    }
+
+    public static Optional<Assurance> showEditAssuranceDialog(Assurance assurance) {
+        AddAssuranceForm content = new AddAssuranceForm();
+        content.setAssuranceData(assurance);
+        return createEntityDialog(content, "Modifier assurance", "Modifiez les informations de l'assurance");
     }
 
     // Interfaces pour le typage générique

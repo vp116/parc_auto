@@ -12,14 +12,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.angbe.soro.parc_auto.controllers.AssuranceController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.angbe.soro.parc_auto.controllers.AssuranceController">
 
     <!-- En-tête avec titre et bouton Ajouter -->
     <HBox alignment="CENTER_LEFT" spacing="600" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
 
         <Label style="-fx-font-size: 20; -fx-font-weight: 800;" text="Gestion des assurances" />
 
-        <Button fx:id="addMissionBtn" styleClass="button-primary" text="Nouvelle assurance">
+        <Button  styleClass="button-primary" text="Nouvelle assurance" onAction="#handleAddAssurance">
             <graphic>
                 <FontAwesomeIconView color="white" iconName="plus" />
             </graphic>
@@ -32,12 +32,11 @@
         <!-- Alerte assurances expirées -->
         <VBox minHeight="117.0" prefHeight="117.0" prefWidth="439.0" spacing="5" style="-fx-background-color: #fee2e2; -fx-border-color: #fecaca; -fx-border-radius: 5; -fx-background-radius: 5;">
             <HBox alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="379.0" spacing="10">
-            <AnchorPane prefHeight="105.0" prefWidth="82.0">
-               <children>
-                  <Circle fill="#e1b4b4" layoutX="29.0" layoutY="31.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <FontAwesomeIconView color="#b91c1c" iconName="circleExclamation" layoutX="21.0" layoutY="37.0" />
-               </children>
-            </AnchorPane>
+                <AnchorPane prefHeight="105.0" prefWidth="82.0">
+                    <Circle fill="#e1b4b4" layoutX="29.0" layoutY="31.0" radius="17.0" stroke="BLACK"
+                            strokeType="INSIDE" strokeWidth="0.0"/>
+                    <FontAwesomeIconView color="#b91c1c" iconName="circleExclamation" layoutX="21.0" layoutY="37.0"/>
+                </AnchorPane>
                 <VBox prefHeight="81.0" prefWidth="318.0" spacing="2">
                     <Label style="-fx-font-weight: bold; -fx-text-fill: #b91c1c;" text="Assurances expirées">
                   <font>
@@ -65,12 +64,11 @@
         <!-- Alerte assurances bientôt expirées -->
         <VBox prefHeight="117.0" prefWidth="495.0" spacing="5" style="-fx-background-color: #fef3c7; -fx-border-color: #fde68a; -fx-border-radius: 5; -fx-background-radius: 5;">
             <HBox alignment="CENTER_LEFT" prefHeight="115.0" prefWidth="382.0" spacing="10">
-            <AnchorPane prefHeight="105.0" prefWidth="82.0">
-               <children>
-                  <Circle fill="#e0dbb6" layoutX="14.0" layoutY="14.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <FontAwesomeIconView color="#eab308" iconName="triangleExclamation" layoutX="6.0" layoutY="20.0" />
-               </children>
-            </AnchorPane>
+                <AnchorPane prefHeight="105.0" prefWidth="82.0">
+                    <Circle fill="#e0dbb6" layoutX="14.0" layoutY="14.0" radius="17.0" stroke="BLACK"
+                            strokeType="INSIDE" strokeWidth="0.0"/>
+                    <FontAwesomeIconView color="#eab308" iconName="triangleExclamation" layoutX="6.0" layoutY="20.0"/>
+                </AnchorPane>
                 <VBox prefHeight="115.0" prefWidth="409.0" spacing="2">
                     <Label style="-fx-font-weight: bold; -fx-text-fill: #92400e;" text="Assurances expirant bientôt">
                   <font>
@@ -97,10 +95,8 @@
     </HBox>
 
     <!-- Tableau des missions avec ScrollPane -->
-    <ScrollPane fx:id="missionScrollPane" fitToWidth="true" layoutY="221.0" prefHeight="359.0" prefWidth="760.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="221.0">
+    <ScrollPane fx:id="AssuranceScrollPane" fitToWidth="true" layoutY="221.0" prefHeight="359.0" prefWidth="760.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="221.0">
 
-        <!-- Le contenu sera ajouté dynamiquement par le contrôleur -->
-        <VBox fx:id="missionContainer" spacing="10" />
     </ScrollPane>
 
 </AnchorPane>

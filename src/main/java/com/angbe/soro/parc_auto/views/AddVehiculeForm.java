@@ -184,8 +184,4 @@ public class AddVehiculeForm extends GridPane implements DialogLauncher.EntityFo
         return createVehiculeFromFields();
     }
 
-    @Override
-    public void clear() {
-        clearForm();
-    }
 }

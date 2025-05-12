@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="428.0" prefWidth="748.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="428.0" style="-fx-background-color: white;" prefWidth="748.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
     <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Statistiques du Parc Automobile" />
 
     <HBox spacing="20.0">

@@ -1,29 +1,19 @@
 package com.angbe.soro.parc_auto.services;
 
+import com.angbe.soro.parc_auto.models.Entretien;
+import com.angbe.soro.parc_auto.models.EtatVoiture;
 import com.angbe.soro.parc_auto.models.Vehicule;
 import com.angbe.soro.parc_auto.repository.AppConfig;
 import com.angbe.soro.parc_auto.repository.Repository;
 import com.angbe.soro.parc_auto.repository.RepositoryFactory;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
-import java.time.LocalDateTime;
-import java.util.*;
-
-
-import com.angbe.soro.parc_auto.models.*;
-import com.angbe.soro.parc_auto.repository.AppConfig;
-import com.angbe.soro.parc_auto.repository.Repository;
-import com.angbe.soro.parc_auto.repository.RepositoryFactory;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 public class EntretienService {
@@ -90,6 +80,37 @@ public class EntretienService {
             query.select(cb.sum(root.get("coutEntr")));
             Double result = em.createQuery(query).getSingleResult();
             return result != null ? result : 0.0;
+        });
+    }
+
+    public void updateEntretien(Entretien e) {
+    }
+
+    public void deleteEntretien(int id) {
+    }
+
+    /**
+     * Recherche les entretiens dont la date d'entrée est comprise entre deux dates
+     *
+     * @param dateDebut la date de début de la période
+     * @param dateFin   la date de fin de la période
+     * @return la liste des entretiens dans la période spécifiée
+     */
+    public List<Entretien> findByDateEntreeBetween(Date dateDebut, Date dateFin) {
+        // Utiliser le repository pour exécuter une requête avec critères
+        return entretienRepository.query(entityManager -> {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Entretien> criteriaQuery = criteriaBuilder.createQuery(Entretien.class);
+            Root<Entretien> root = criteriaQuery.from(Entretien.class);
+
+            // Créer la condition : dateEntree entre dateDebut et dateFin
+            Predicate predicate = criteriaBuilder.between(root.get("dateEntree"), dateDebut, dateFin);
+
+            // Appliquer la condition à la requête
+            criteriaQuery.where(predicate);
+
+            // Exécuter la requête et retourner les résultats
+            return entityManager.createQuery(criteriaQuery).getResultList();
         });
     }
 }

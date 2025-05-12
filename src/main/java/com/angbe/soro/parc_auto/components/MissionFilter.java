@@ -32,8 +32,6 @@ public class MissionFilter extends HBox {
     private ComboBox<String> vehiculeComboBox;
 
     public MissionFilter() {
-
-
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("components/mission-filter.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -47,7 +45,6 @@ public class MissionFilter extends HBox {
         } catch (IOException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
-
     }
 
     private void initializeComboBoxes() {
@@ -58,30 +55,36 @@ public class MissionFilter extends HBox {
         vehiculeComboBox.getSelectionModel().selectFirst();
     }
 
-
-    public LocalDate getStartDatePicker() {
+    // Méthode pour récupérer la date de début
+    public LocalDate getDateDebut() {
         return startDatePicker.getValue();
     }
 
-    public LocalDate getEndDatePicker() {
+    // Méthode pour récupérer la date de fin
+    public LocalDate getDateFin() {
         return endDatePicker.getValue();
     }
 
+    // Méthode pour récupérer le statut sélectionné
     public String getSelectedStatus() {
         return statusCombo.getValue();
     }
 
+    // Méthode pour récupérer le véhicule sélectionné
+    public String getSelectedVehicule() {
+        return vehiculeComboBox.getValue();
+    }
 
     // Méthode pour définir l'action du bouton Filtrer
     public void setOnFilterAction(EventHandler<ActionEvent> eventHandler) {
         filterButton.setOnAction(eventHandler);
     }
 
+    // Méthode pour réinitialiser les filtres
     public void resetFilters() {
         statusCombo.getSelectionModel().selectFirst();
         vehiculeComboBox.getSelectionModel().selectFirst();
         startDatePicker.setValue(null);
         endDatePicker.setValue(null);
     }
-
 }

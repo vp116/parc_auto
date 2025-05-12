@@ -25,8 +25,6 @@ import javafx.scene.shape.Circle;
  */
 public class StatCard extends Pane {
 
-    // Éléments UI
-    private VBox card;
     private Label titleLabel;
     private Label valueLabel;
     private FontAwesomeIconView icon;
@@ -65,7 +63,8 @@ public class StatCard extends Pane {
      */
     private void initializeCard() {
         // Conteneur principal
-        card = new VBox();
+        // Éléments UI
+        VBox card = new VBox();
         card.getStyleClass().add("stat-card");
         card.setStyle("-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
         card.setPadding(new Insets(20));

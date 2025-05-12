@@ -82,16 +82,17 @@ public class PersonnelController implements Initializable {
 
     private void updatePersonnel(Personnel personnel) {
         var formResult = DialogLauncher.showEditPersonnelDialog(personnel);
-        formResult.ifPresent(updatedPersonnel -> {
+        formResult.ifPresent(p -> {
             try {
-                personnelService.updatePersonnel(updatedPersonnel);
-                RefreshPersonnelTable();
-                showSuccessAlert("Personnel mis à jour avec succès!");
+                personnelService.updatePersonnel(p);
+                refreshPersonnelTable();
             } catch (Exception e) {
                 ShowEchecEnregAlert(e);
             }
         });
+
     }
+
 
     private void deletePersonnel(Personnel personnel) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -103,7 +104,7 @@ public class PersonnelController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 personnelService.deletePersonnel(personnel.getIdPersonnel());
-                RefreshPersonnelTable();
+                refreshPersonnelTable();
                 showSuccessAlert("Personnel supprimé avec succès!");
             } catch (Exception e) {
                 ShowEchecEnregAlert(e);
@@ -117,7 +118,7 @@ public class PersonnelController implements Initializable {
         formResult.ifPresent(personnel -> {
             try {
                 personnelService.savePersonnel(personnel);
-                RefreshPersonnelTable();
+                refreshPersonnelTable();
                 showSuccessAlert("Personnel enregistré avec succès!");
             } catch (Exception e) {
                 ShowEchecEnregAlert(e);
@@ -125,7 +126,7 @@ public class PersonnelController implements Initializable {
         });
     }
 
-    private void RefreshPersonnelTable() {
+    private void refreshPersonnelTable() {
         personnelTableCard.getTableView().getItems().setAll(personnelService.getAllPersonnel());
     }
 }

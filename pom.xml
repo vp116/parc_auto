@@ -26,10 +26,12 @@
         </dependency>
 
         <dependency>
-            <groupId>com.cardosama</groupId>
-            <artifactId>fontawesome_fx_6</artifactId>
-            <version>1.1</version>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.1.4</version>
         </dependency>
+
+
 
         <dependency>
             <groupId>jakarta.persistence</groupId>
@@ -61,6 +63,14 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.cardosama</groupId>
+            <artifactId>fontawesome_fx_6</artifactId>
+            <version>1.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/fontawesome_fx_6-1.1.jar</systemPath>
         </dependency>
     </dependencies>
 

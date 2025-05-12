@@ -1,30 +1,33 @@
 package com.angbe.soro.parc_auto.controllers;
 
-import com.angbe.soro.parc_auto.components.DialogLauncher;
 import com.angbe.soro.parc_auto.components.DynamicTableCard;
 import com.angbe.soro.parc_auto.components.MissionFilter;
 import com.angbe.soro.parc_auto.models.Mission;
-import com.angbe.soro.parc_auto.repository.AppConfig;
 import com.angbe.soro.parc_auto.services.MissionService;
+import com.cardosama.fontawesome_fx_6.FontAwesomeIconView;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.net.URL;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-public class MissionController implements Initializable, AutoCloseable {
+import static com.angbe.soro.parc_auto.ViewFactory.ShowEchecEnregAlert;
+import static com.angbe.soro.parc_auto.ViewFactory.showSuccessAlert;
+
+public class MissionController {
     @FXML
     private ScrollPane missionScrollPane;
     @FXML
@@ -33,83 +36,104 @@ public class MissionController implements Initializable, AutoCloseable {
     private MissionFilter missionFilter;
     @FXML
     private Button addMissionBtn;
-    private MissionService missionService;
+    private final MissionService missionService = new MissionService();
     private EntityManagerFactory emf;
     private EntityManager em;
     private DynamicTableCard<Mission> missionCardTable;
 
 
     private void loadMissions() {
-        missionContainer.getChildren().clear();
-
-        // Exemple avec des données statiques
+        // Récupérer les missions depuis le service
         List<Mission> missions = missionService.getAllMissions();
 
-        missions.forEach(mission -> {
-            HBox card = createMissionCard(mission);
-            missionContainer.getChildren().add(card);
-        });
+        // Créer les boutons d'export et d'impression
+        var btnExport = new Button("", new FontAwesomeIconView("fileExport"));
+        btnExport.getStyleClass().add("btn-actions");
+        var btnPrint = new Button("", new FontAwesomeIconView("print"));
+        btnPrint.getStyleClass().add("btn-actions");
+
+        // Initialiser le DynamicTableCard
+        missionCardTable = new DynamicTableCard<>("Liste des missions", null, null, List.of(btnExport, btnPrint), true);
+        missionCardTable.setItems(FXCollections.observableArrayList(missions));
+
+        // Ajouter les colonnes
+        missionCardTable.addCustomColumn("Véhicule", m -> m.getVehicule().getImmatriculation() + " (" + m.getVehicule().getMarque() + " " + m.getVehicule().getModele() + ")");
+        missionCardTable.addCustomColumn("Date début", m -> new SimpleDateFormat("dd/MM/yyyy").format(m.getDateDebut()));
+        missionCardTable.addCustomColumn("Date fin", m -> new SimpleDateFormat("dd/MM/yyyy").format(m.getDateFin()));
+        missionCardTable.addPropertyColumn("Circuit", "circuit");
+        missionCardTable.addCustomColumn("Budget", m -> NumberFormat.getInstance(Locale.FRANCE).format(m.getCout()) + " FCFA");
+        missionCardTable.addPropertyColumn("Observation", "observation");
+        missionCardTable.addColumn(DynamicTableCard.createActionsColumn("Actions", this::viewMission, this::updateMission, this::deleteMission));
+
+        // Ajouter le tableau au ScrollPane
+        missionScrollPane.setContent(missionCardTable);
     }
 
-    private HBox createMissionCard(Mission mission) {
-        HBox card = new HBox(15);
-        card.getStyleClass().add("mission-card");
-        card.setPadding(new Insets(15));
-
-        Label vehicleLabel = new Label(mission.getVehicule().getImmatriculation());
-        Label periodLabel = new Label(mission.getDateDebut() + " - " + mission.getDateFin());
-        Label statusLabel = new Label(mission.getObservation());
-        statusLabel.getStyleClass().add("status-" + mission.getObservation().toLowerCase().replace(" ", "-"));
-
-        card.getChildren().addAll(vehicleLabel, periodLabel, statusLabel);
-        return card;
+    private void updateMission(Mission mission) {
     }
 
+    private void viewMission(Mission mission) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Détails de la mission");
+        alert.setHeaderText("Informations sur la mission");
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+        String content = "Véhicule: " + mission.getVehicule().getImmatriculation() + "\n" +
+                "Circuit: " + mission.getCircuit() + "\n" +
+                "Période: " + new SimpleDateFormat("dd/MM/yyyy").format(mission.getDateDebut()) +
+                " - " + new SimpleDateFormat("dd/MM/yyyy").format(mission.getDateFin()) + "\n" +
+                "Budget: " + NumberFormat.getInstance(Locale.FRANCE).format(mission.getCout()) + " FCFA\n" +
+                "Coût carburant: " + NumberFormat.getInstance(Locale.FRANCE).format(mission.getCoutCarburant()) + " FCFA\n" +
+                "Observation: " + mission.getObservation();
 
-        try {
-            // Initialisation de l'EntityManager et AppConfig
-            emf = Persistence.createEntityManagerFactory("bdGestionParcAuto");
-            em = emf.createEntityManager();
-            AppConfig.initialize(em);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
-            // Initialisation du service
-            missionService = new MissionService();
+    private void deleteMission(Mission mission) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Supprimer la mission");
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer cette mission ?");
 
-            // Affichage des véhicules dans la table
-            loadMissions();
-
-            missionFilter.setOnFilterAction(e -> applyFilters());
-
-            addMissionBtn.setOnAction(e -> DialogLauncher.showAddMissionDialog());
-
-
-        } catch (Exception e) {
-            Logger.getLogger(VehiculeController.class.getName()).log(Level.SEVERE, null, e);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                missionService.deleteMission(mission.getIdMission());
+                refreshMissionTable();
+                showSuccessAlert("Mission supprimée avec succès!");
+            } catch (Exception e) {
+                ShowEchecEnregAlert(e);
+            }
         }
-    }
-
-    private void showAddMissionDialog() {
-
-
-
     }
 
     private void applyFilters() {
-        System.out.println("applyFilters");
+        // Récupérer les valeurs des filtres depuis missionFilter
+        String vehicule = missionFilter.getSelectedVehicule();
+        LocalDate dateDebut = missionFilter.getDateDebut();
+        LocalDate dateFin = missionFilter.getDateDebut();
+
+        // Filtrer les missions
+        List<Mission> filteredMissions = missionService.getAllMissions().stream()
+                .filter(m -> vehicule == null || vehicule.isEmpty() ||
+                        m.getVehicule().getImmatriculation().contains(vehicule) ||
+                        m.getVehicule().getMarque().contains(vehicule))
+                .filter(m -> dateDebut == null ||
+                        m.getDateDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(dateDebut) ||
+                        m.getDateDebut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(dateDebut))
+                .filter(m -> dateFin == null ||
+                        m.getDateFin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(dateFin) ||
+                        m.getDateFin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(dateFin))
+                .collect(Collectors.toList());
+
+        // Mettre à jour le tableau
+        missionCardTable.setItems(FXCollections.observableArrayList(filteredMissions));
+    }
+
+    private void refreshMissionTable() {
+        missionCardTable.getTableView().getItems().setAll(missionService.getAllMissions());
     }
 
 
-    @Override
-    public void close() throws Exception {
-        if (em != null) {
-            em.close();
-        }
-        if (emf != null) {
-            emf.close();
-        }
-    }
 }
 

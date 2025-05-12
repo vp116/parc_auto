@@ -12,6 +12,7 @@
 <?import com.angbe.soro.parc_auto.components.EntretienFilter?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/17"
+            style="-fx-background-color: white;"
             fx:controller="com.angbe.soro.parc_auto.controllers.PersonnelController"
             stylesheets="@../styles/style.css"
             prefHeight="600.0"

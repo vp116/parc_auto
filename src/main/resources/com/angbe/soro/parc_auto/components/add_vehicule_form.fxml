@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+
+<?import java.lang.String?>
+<fx:root type="javafx.scene.layout.GridPane" xmlns:fx="http://javafx.com/fxml/1" hgap="10" vgap="10">
+    <padding>
+        <Insets top="20" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- N° de châssis -->
+    <Label text="N° de châssis:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="chassisField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <!-- Immatriculation -->
+    <Label text="Immatriculation:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="plateField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <!-- Marque -->
+    <Label text="Marque:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="brandCombo" promptText="Sélectionnez une marque" GridPane.rowIndex="2" GridPane.columnIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Toyota"/>
+                <String fx:value="Peugeot"/>
+                <String fx:value="Renault"/>
+                <String fx:value="Ford"/>
+                <String fx:value="Hyundai"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <!-- Modèle -->
+    <Label text="Modèle:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="modelField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <!-- Nombre de places -->
+    <Label text="Nombre de places:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Spinner fx:id="seatsSpinner" editable="true" GridPane.rowIndex="4" GridPane.columnIndex="1">
+        <valueFactory>
+            <SpinnerValueFactory.IntegerSpinnerValueFactory min="2" max="9" initialValue="5"/>
+        </valueFactory>
+    </Spinner>
+
+    <!-- Énergie -->
+    <Label text="Énergie:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="energyCombo" promptText="Sélectionnez un type" GridPane.rowIndex="5" GridPane.columnIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Essence"/>
+                <String fx:value="Diesel"/>
+                <String fx:value="Hybride"/>
+                <String fx:value="Électrique"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <!-- Puissance -->
+    <Label text="Puissance (CV):" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="powerField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+    <!-- Couleur -->
+    <Label text="Couleur:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <TextField fx:id="colorField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+    <!-- Prix -->
+    <Label text="Prix:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+    <TextField fx:id="priceField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+</fx:root>

@@ -1,6 +1,7 @@
 package com.angbe.soro.parc_auto.views;
 
 import com.angbe.soro.parc_auto.MainApplication;
+import com.angbe.soro.parc_auto.components.DialogLauncher;
 import com.angbe.soro.parc_auto.models.Entretien;
 import com.angbe.soro.parc_auto.models.Vehicule;
 import com.angbe.soro.parc_auto.services.VehiculeService;
@@ -8,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -23,9 +25,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
-public class AddEntretienForm extends GridPane {
+public class AddEntretienForm extends GridPane implements DialogLauncher.EntityForm<Entretien> {
 
     private final VehiculeService vehiculeService = new VehiculeService();
+    private Entretien entretienEnEdition;
     @FXML
     private ComboBox<Vehicule> vehiculeCombo;
     @FXML
@@ -167,5 +170,15 @@ public class AddEntretienForm extends GridPane {
 
     public void setEntretienData(Entretien entretien) {
 
+    }
+
+    @Override
+    public Node getContent() {
+        return this;
+    }
+
+    @Override
+    public Entretien createEntity() throws IllegalArgumentException {
+        return createEntretienFromFields();
     }
 }

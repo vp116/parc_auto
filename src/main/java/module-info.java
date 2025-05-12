@@ -1,10 +1,9 @@
 module com.angbe.soro.parc_auto {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
-
-
     requires java.naming;
     requires com.cardosama.fontawesome_fx_6;
 

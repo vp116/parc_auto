@@ -11,7 +11,7 @@
 <AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.angbe.soro.parc_auto.controllers.VehiculeController">
 
    <!-- En-tête avec titre et bouton Ajouter -->
-   <HBox alignment="CENTER_LEFT" spacing="600.0" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+   <HBox alignment="CENTER_LEFT"  style="-fx-background-color: white;" spacing="600.0" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
       <Label style="-fx-font-size: 20; -fx-font-weight: 800;" text="Gestion des Véhicules" />
 
       <Button styleClass="button-primary" text="Ajouter un Véhicule" onAction="#handleAddVehicle" AnchorPane.rightAnchor="20">

@@ -47,8 +47,11 @@ public class VehiculeFilter extends VBox {
         etatComboBox.getItems().addAll("Tous", "Disponible", "En maintenance", "Loué", "Hors service");
         etatComboBox.getSelectionModel().selectFirst();
 
-        // La marque est déjà initialisée dans le FXML
-        marqueComboBox.getSelectionModel().selectFirst();
+        // Initialisation des marques de véhicules courantes
+        if (marqueComboBox.getItems().isEmpty()) {
+            marqueComboBox.getItems().addAll("Tous", "Toyota", "Renault", "Peugeot", "Mercedes", "BMW", "Audi", "Volkswagen", "Ford", "Nissan", "Hyundai");
+            marqueComboBox.getSelectionModel().selectFirst();
+        }
     }
 
     // Méthodes pour récupérer les valeurs des filtres

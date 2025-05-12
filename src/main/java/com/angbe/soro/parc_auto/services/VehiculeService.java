@@ -86,6 +86,13 @@ public class VehiculeService {
     public List<Vehicule> getVehiculesEnEntretien() {
         return getVehiculesByEtat("En entretien");
     }
+
+    public void updateVehicule(Vehicule v) {
+        if(!vehiculeRepository.existsById(v.getIdVehicule())){
+            throw new RuntimeException("Le vehicule  avec l'ID" + v.getIdVehicule() + " n'existe pas");
+        }
+        vehiculeRepository.update(v);
+    }
 }
 
 
