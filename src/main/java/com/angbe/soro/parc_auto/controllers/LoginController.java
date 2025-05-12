@@ -1,5 +1,6 @@
 package com.angbe.soro.parc_auto.controllers;
 
+import com.angbe.soro.parc_auto.models.Utilisateur;
 import com.angbe.soro.parc_auto.repository.AppConfig;
 import com.angbe.soro.parc_auto.services.AuthenticationService;
 import javafx.fxml.FXML;
@@ -65,6 +66,10 @@ public class LoginController implements Initializable {
             if (authService.authentifier(email, password)) {
                 if (rememberCheckBox.isSelected()) {
                     // TODO: Implémenter la sauvegarde des identifiants
+
+                    Utilisateur utilisateurConnecter = authService.getUtilisateurConnecte();
+                    email = utilisateurConnecter.getEmail();
+                    password = utilisateurConnecter.getPassword();
                 }
                 openMainWindow();
                 closeCurrentWindow();

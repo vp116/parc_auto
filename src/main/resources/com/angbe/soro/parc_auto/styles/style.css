@@ -1,6 +1,7 @@
-/* styles.css - JavaFX Stylesheet inspiré de la maquette Tailwind */
+/*
+!* styles.css - JavaFX Stylesheet inspiré de la maquette Tailwind *!
 
-/* Couleurs de base */
+!* Couleurs de base *!
 .root {
     -fx-primary: #3b82f6;
     -fx-primary-dark: #1e40af;
@@ -16,12 +17,12 @@
 }
 
 
-/* Layout principal */
+!* Layout principal *!
 .main-container {
     -fx-background-color: -fx-light;
 }
 
-/* Sidebar */
+!* Sidebar *!
 .sidebar {
     -fx-background-color: -fx-dark;
     -fx-padding: 10px;
@@ -61,7 +62,7 @@
 }
 
 
-/* Header */
+!* Header *!
 .header {
     -fx-background-color: white;
     -fx-padding: 15px;
@@ -88,7 +89,7 @@
     -fx-icon-size: 16px;
 }
 
-/* Cartes statistiques */
+!* Cartes statistiques *!
 .stat-card {
     -fx-background-color: white;
     -fx-background-radius: 8px;
@@ -117,7 +118,7 @@
     -fx-font-size: 12px;
 }
 
-/* Amélioration des graphiques pour la page de rapports */
+!* Amélioration des graphiques pour la page de rapports *!
 .chart {
     -fx-padding: 10px;
     -fx-background-insets: 0 0 0 0;
@@ -163,7 +164,7 @@
     -fx-stroke-width: 0;
 }
 
-/* Styles spécifiques pour les différents types de graphiques */
+!* Styles spécifiques pour les différents types de graphiques *!
 .pie-chart {
     -fx-border-color: #f1f5f9;
     -fx-border-width: 1px;
@@ -203,7 +204,7 @@
     -fx-padding: 3px;
 }
 
-/* Styles pour les onglets de la page de rapports */
+!* Styles pour les onglets de la page de rapports *!
 .tab-pane {
     -fx-tab-min-width: 100px;
     -fx-background-color: transparent;
@@ -248,7 +249,7 @@
     -fx-padding: 15px;
 }
 
-/* Styles pour le sélecteur de période */
+!* Styles pour le sélecteur de période *!
 .combo-box {
     -fx-background-color: white;
     -fx-background-radius: 6px;
@@ -274,7 +275,7 @@
     -fx-background-color: #64748b;
 }
 
-/* Styles pour le ScrollPane */
+!* Styles pour le ScrollPane *!
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-padding: 0;
@@ -303,15 +304,15 @@
     -fx-background-color: #94a3b8;
 }
 
-/* styles.css - JavaFX Stylesheet inspiré de la maquette Tailwind */
+!* styles.css - JavaFX Stylesheet inspiré de la maquette Tailwind *!
 
 
-/* Layout principal */
+!* Layout principal *!
 .main-container {
     -fx-background-color: -fx-light;
 }
 
-/* Sidebar */
+!* Sidebar *!
 .sidebar {
     -fx-background-color: -fx-dark;
     -fx-padding: 10px;
@@ -350,7 +351,7 @@
 }
 
 
-/* Header */
+!* Header *!
 .header {
     -fx-background-color: white;
     -fx-padding: 15px;
@@ -377,7 +378,7 @@
     -fx-icon-size: 16px;
 }
 
-/* Cartes statistiques */
+!* Cartes statistiques *!
 .stats-card {
     -fx-background-color: white;
     -fx-background-radius: 8px;
@@ -402,7 +403,7 @@
     -fx-padding: 8px;
 }
 
-/* Tableaux */
+!* Tableaux *!
 .table-view {
     -fx-background-color: white;
     -fx-background-radius: 8px;
@@ -431,7 +432,7 @@
     -fx-background-color: #dbeafe;
 }
 
-/* Badges */
+!* Badges *!
 .badge {
     -fx-padding: 3px 8px;
     -fx-background-radius: 999px;
@@ -459,7 +460,7 @@
     -fx-text-fill: #1e40af;
 }
 
-/* Boutons */
+!* Boutons *!
 .button {
     -fx-background-radius: 6px;
     -fx-padding: 8px 16px;
@@ -505,7 +506,7 @@
     -fx-background-color: #f9fafb;
 }
 
-/* Modales */
+!* Modales *!
 .modal-background {
     -fx-background-color: rgba(0, 0, 0, 0.5);
 }
@@ -567,7 +568,7 @@
     -fx-spacing: 15px;
 }
 
-/* Formulaires */
+!* Formulaires *!
 .form-label {
     -fx-text-fill: #374151;
     -fx-font-size: 14px;
@@ -587,7 +588,7 @@
     -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.3), 10, 0, 0, 0);
 }
 
-/* Pagination */
+!* Pagination *!
 .pagination {
     -fx-padding: 15px;
     -fx-border-color: #e5e7eb;
@@ -613,7 +614,7 @@
     -fx-border-color: -fx-primary;
 }
 
-/* Alertes */
+!* Alertes *!
 .alert-warning {
     -fx-background-color: #fffbeb;
     -fx-border-color: #fcd34d;
@@ -630,7 +631,7 @@
     -fx-padding: 12px;
 }
 
-/* Avatar */
+!* Avatar *!
 .avatar {
     -fx-fill: white;
     -fx-stroke: #e5e7eb;
@@ -639,7 +640,7 @@
     -fx-font-weight: bold;
 }
 
-/* Icônes */
+!* Icônes *!
 .icon {
     -fx-icon-size: 16px;
 }
@@ -652,7 +653,7 @@
     -fx-icon-size: 20px;
 }
 
-/* Spécifique aux graphiques */
+!* Spécifique aux graphiques *!
 .chart {
     -fx-background-color: transparent;
 }
@@ -665,12 +666,12 @@
     -fx-stroke-width: 2px;
 }
 
-/* Transitions */
+!* Transitions *!
 .transition-all {
     -fx-transition-duration: 150ms;
 }
 
-/* Utilitaires */
+!* Utilitaires *!
 .rounded-full {
     -fx-background-radius: 999px;
 }
@@ -685,7 +686,7 @@
 }
 
 
-/* Style pour le dialogue d'ajout de véhicule */
+!* Style pour le dialogue d'ajout de véhicule *!
 .dialog-pane {
     -fx-background-color: #ffffff;
     -fx-border-color: #e5e7eb;
@@ -762,7 +763,7 @@
     -fx-background-color: #e5e7eb;
 }
 
-/* Styles pour les séries de graphiques */
+!* Styles pour les séries de graphiques *!
 .default-color0.chart-pie { -fx-pie-color: #3b82f6; }
 .default-color1.chart-pie { -fx-pie-color: #10b981; }
 .default-color2.chart-pie { -fx-pie-color: #f59e0b; }
@@ -797,4 +798,4 @@
 .default-color4.chart-line-symbol { -fx-background-color: #8b5cf6; }
 .default-color5.chart-line-symbol { -fx-background-color: #ec4899; }
 .default-color6.chart-line-symbol { -fx-background-color: #06b6d4; }
-.default-color7.chart-line-symbol { -fx-background-color: #84cc16; }
+.default-color7.chart-line-symbol { -fx-background-color: #84cc16; }*/

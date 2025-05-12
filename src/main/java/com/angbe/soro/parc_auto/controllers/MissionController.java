@@ -1,5 +1,6 @@
 package com.angbe.soro.parc_auto.controllers;
 
+import com.angbe.soro.parc_auto.components.DialogLauncher;
 import com.angbe.soro.parc_auto.components.DynamicTableCard;
 import com.angbe.soro.parc_auto.components.MissionFilter;
 import com.angbe.soro.parc_auto.models.Mission;
@@ -28,6 +29,7 @@ import static com.angbe.soro.parc_auto.ViewFactory.ShowEchecEnregAlert;
 import static com.angbe.soro.parc_auto.ViewFactory.showSuccessAlert;
 
 public class MissionController {
+    private final MissionService missionService = new MissionService();
     @FXML
     private ScrollPane missionScrollPane;
     @FXML
@@ -36,7 +38,6 @@ public class MissionController {
     private MissionFilter missionFilter;
     @FXML
     private Button addMissionBtn;
-    private final MissionService missionService = new MissionService();
     private EntityManagerFactory emf;
     private EntityManager em;
     private DynamicTableCard<Mission> missionCardTable;
@@ -134,6 +135,17 @@ public class MissionController {
         missionCardTable.getTableView().getItems().setAll(missionService.getAllMissions());
     }
 
-
+    @FXML
+    public void handleAddMissionDialog() {
+        var formResult = DialogLauncher.showAddMissionDialog();
+        formResult.ifPresent(mission -> {
+            try {
+                missionService.saveMission(mission);
+                refreshMissionTable();
+            } catch (Exception e) {
+                ShowEchecEnregAlert(e);
+            }
+        });
+    }
 }
 

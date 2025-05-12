@@ -1,4 +1,5 @@
-/* Couleurs principales */
+/*
+!* Couleurs principales *!
 .root {
     -fx-primary-color: #3498db;
     -fx-secondary-color: #2980b9;
@@ -9,13 +10,13 @@
     -fx-danger-color: #e74c3c;
 }
 
-/* Style général */
+!* Style général *!
 .dashboard-root {
     -fx-background-color: -fx-light-color;
     -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
-/* Sidebar */
+!* Sidebar *!
 .sidebar {
     -fx-background-color: -fx-dark-color;
     -fx-padding: 0 0 20 0;
@@ -39,7 +40,7 @@
     -fx-fill: -fx-primary-color;
 }
 
-/* Contenu principal */
+!* Contenu principal *!
 .main-content {
     -fx-padding: 20;
 }
@@ -69,7 +70,7 @@
     -fx-fill: -fx-primary-color;
 }
 
-/* Cartes statistiques */
+!* Cartes statistiques *!
 .stats-cards-container {
     -fx-padding: 0 0 30 0;
 }
@@ -119,7 +120,7 @@
     -fx-text-fill: #95a5a6;
 }
 
-/* Graphiques */
+!* Graphiques *!
 .charts-container {
     -fx-padding: 20 0 0 0;
 }
@@ -146,9 +147,9 @@
     -fx-background-color: transparent;
 }
 
-/* Animation au survol */
+!* Animation au survol *!
 .stats-card:hover {
     -fx-translate-y: -5;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
     -fx-transition: all 0.3s;
-}
+}*/
